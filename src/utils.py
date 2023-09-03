@@ -13,7 +13,7 @@ import holidays
 
 
 #openWeather api key
-WEATHER_API_KEY = "de778308297bcd7373e6196d8ab1e47b"
+WEATHER_API_KEY = ""
 
 def save_object(file_path,obj):
     try:
