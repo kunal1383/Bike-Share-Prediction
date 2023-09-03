@@ -66,7 +66,8 @@ Follow these steps to set up and run the project:
 
 Below is a screenshot of the project's user interface:
 
-![User Interface](/path/to/screenshot.png)
+![Application](https://github.com/kunal1383/Bike-Share-Prediction/assets/48025219/38627cc7-f864-4fd9-8baa-019313fd06a0)
+![result](https://github.com/kunal1383/Bike-Share-Prediction/assets/48025219/e7fb55fa-6a7d-4e81-85b9-6679fe8c0e28)
 
 ## Contributor
 
