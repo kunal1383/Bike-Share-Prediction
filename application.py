@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 from src.logger import logging
 from src.exception import CustomException 
 from src.pipeline.training_pipline import TrainingPipeline
