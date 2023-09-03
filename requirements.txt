@@ -1,0 +1,16 @@
+numpy
+pandas
+Flask
+scikit-learn
+seaborn
+matplotlib
+mlflow
+dvc
+ipykernel
+optuna
+xgboost
+cassandra-driver  
+pyowm
+pycountry
+holidays 
+-e .

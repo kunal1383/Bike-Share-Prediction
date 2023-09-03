@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Data Science/Projects/Bike Share Prediction/mlruns/0/8a44554d3f8848179e1033560b2c4491/artifacts
+end_time: 1693495868955
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8a44554d3f8848179e1033560b2c4491
+run_name: whimsical-cod-760
+run_uuid: 8a44554d3f8848179e1033560b2c4491
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1693495868866
+status: 3
+tags: []
+user_id: seVen

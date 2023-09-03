@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daily Bike Sharing Demand Prediction</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-A4g4S3qQaIIVU8jnn5sXvMO5K7XdBhAO4+Utx2nOxzMIT8vzbET8XT7kK0jKZfpC" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='./style.css') }}">
+
+  
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card mx-auto">
+            <div class="card-header text-center">
+                <h2>Daily Bike Sharing Demand Prediction</h2>
+            </div>
+            
+            <div class="card-body">
+                <form action="{{url_for('fetch_data')}}" method="POST" id="fetchForm">
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" name="date" id="date" required value="{{ date }}">
+                        
+                        <div class="form-group">
+                            <label for="country">Select a country:</label>
+                            <select id="country" name="country">
+                                {% for country in countries %}
+                                <option value="{{ country.code }}" {% if country_code == country.code %} selected {% endif %}>{{ country.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" placeholder="Enter the city name" required value="{{ city }}">
+                        </div>
+                        <label for="fetch-data">Fetch Data using API:</label>
+                        <input type="checkbox" name="fetch_data" id="fetch-data">
+                        <input type="submit" value="Fetch">
+                    </div>
+                </form>
+                <form action="{{url_for('prediction')}}" method="POST">
+
+                    
+                    
+                    <!-- Season -->
+                    <div class="form-group">
+                        <label for="Season" class="form-label">Season:</label>
+                        <select class="form-select" id="Season" name="Season">
+                            <option value="1">Spring</option>
+                            <option value="2">Summer</option>
+                            <option value="3">Fall</option>
+                            <option value="4">Winter</option>
+                        </select>
+                    </div>
+
+                    <!-- Weather -->
+                    <div class="form-group">
+                        <label for="Weather" class="form-label">Weather:</label>
+                        <select class="form-select" id="Weather" name="Weather">
+                            <option value="1">Clear / Cloudy</option>
+                            <option value="2">Mist </option>
+                            <option value="3">Light rain / Light Snow</option>
+                            <option value="4">Heavy Rain / Thunderstorm</option>
+                        </select>
+                    </div>
+                    <!-- Temperature -->
+                    <div class="form-group">
+                        <label for="Temperature" class="form-label">Temperature:</label>
+                        <input type="text" class="form-control" id="Temperature" name="Temperature" placeholder="Enter the Temperature in celsius (float)" {% if temperature is not none %} value="{{ temperature }}" {% endif %}>
+                    </div>
+
+                    <!--Humidity -->
+                    <div class="form-group">
+                        <label for="Humidity" class="form-label">Humidity:</label>
+                        <input type="text" class="form-control" id="Humidity" name="Humidity" placeholder="Enter the Humidity (float)" {% if humidity is not none %} value="{{ humidity }}" {% endif %}>
+                    </div>
+
+                    <!-- Wind Speed -->
+                    <div class="form-group">
+                        <label for="Wind_speed" class="form-label">Wind Speed:</label>
+                        <input type="text" class="form-control" id="Wind_speed" name="Wind_speed" placeholder="Enter the Wind Speed (float)" {% if wind_speed is not none %} value="{{ wind_speed }}" {% endif %}>
+                    </div>
+                    
+
+                    
+                    <input type="hidden" name="hidden_city" id="hidden_city" {% if city is not none %} value="{{ city }}" {% endif %}>
+                    <input type="hidden" name="hidden_date" id="hidden_date" {% if date is not none %} value="{{ date }}" {% endif %}>
+                    <input type="hidden" name="hidden_country" id="hidden_country" {% if country_code is not none %} value="{{ country_code }}" {% endif %}>
+                                    
+
+                    <div style="clear:both;"></div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adding Bootstrap JS -->
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-S5RD4HjPnZ2MUiUrGJ3m9PExlE6lK9QfJUfuTcHGIVm2N4Uv9bDU3zjIeCAwQTgj" crossorigin="anonymous"></script>
+    <script>
+        const cityInput = document.getElementById('city');
+    
+        function fetchData() {
+            const dateInput = document.getElementById('date');
+            const fetchCheckbox = document.getElementById('fetch-data');
+    
+            if (fetchCheckbox.checked) {
+                fetch('/fetch_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ date: dateInput.value })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.temperature !== null && data.humidity !== null && data.wind_speed !== null) {
+                        document.getElementById('hidden_city').value = data.city;
+                        document.getElementById('Temperature').value = data.temperature;
+                        document.getElementById('Humidity').value = data.humidity;
+                        document.getElementById('Wind_speed').value = data.wind_speed;
+                    } else {
+                        // Update values to blank
+                        document.getElementById('Temperature').value = '';
+                        document.getElementById('Humidity').value = '';
+                        document.getElementById('Wind_speed').value = '';
+                        alert("Could not fetch data. Please fill in the details manually.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Data Science/Projects/Bike Share Prediction/mlruns/0/e0f36a12f7f94e61855433820f950b45/artifacts
+end_time: 1693496042702
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e0f36a12f7f94e61855433820f950b45
+run_name: unequaled-loon-241
+run_uuid: e0f36a12f7f94e61855433820f950b45
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1693495971801
+status: 3
+tags: []
+user_id: seVen
